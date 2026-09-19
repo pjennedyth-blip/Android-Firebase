@@ -2,7 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
+
 
 android {
     namespace = "com.example.taskmanagerapp"
@@ -11,6 +14,7 @@ android {
             minorApiLevel = 1
         }
     }
+
 
     defaultConfig {
         applicationId = "com.example.taskmanagerapp"
@@ -58,6 +62,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
 // Cloud Firestore
     implementation("com.google.firebase:firebase-firestore")
+// Firebase Authentication
+    implementation("com.google.firebase:firebase-auth")
 // (Opcional) Analytics
     implementation("com.google.firebase:firebase-analytics")
 // Puente corrutinas <-> Tasks de Google Play Services (permite usar .await())
@@ -70,6 +76,15 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.09.00"))
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
+
 
     implementation(libs.androidx.material.icons.extended)
 }
