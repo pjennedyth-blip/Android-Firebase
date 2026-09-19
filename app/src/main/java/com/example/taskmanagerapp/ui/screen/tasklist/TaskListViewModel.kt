@@ -54,6 +54,10 @@ class TaskListViewModel @Inject constructor(
         }
     }
 
+    fun onSearchQueryChange(query: String) {
+        _uiState.update { it.copy(searchQuery = query) }
+    }
+
     fun toggleTaskCompletion(task: Task) {
         viewModelScope.launch {
             val updatedTask = task.copy(completed = !task.completed, updatedAt = System.currentTimeMillis())

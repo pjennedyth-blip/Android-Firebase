@@ -1,5 +1,6 @@
 package com.example.taskmanagerapp.ui.screen.taskform
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -60,6 +61,37 @@ fun TaskFormScreen(
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 3
             )
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "Estado de la tarea",
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier.align(Alignment.Start)
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = !uiState.completed,
+                    onClick = { viewModel.onCompletedChange(false) }
+                )
+                Text(
+                    text = "Pendiente",
+                    modifier = Modifier.clickable { viewModel.onCompletedChange(false) }
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                RadioButton(
+                    selected = uiState.completed,
+                    onClick = { viewModel.onCompletedChange(true) }
+                )
+                Text(
+                    text = "Completada",
+                    modifier = Modifier.clickable { viewModel.onCompletedChange(true) }
+                )
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             if (uiState.operationState is OperationState.Loading) {

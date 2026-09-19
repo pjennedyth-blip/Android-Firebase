@@ -44,6 +44,12 @@ class TaskFormViewModel @Inject constructor(
         }
     }
 
+    fun onCompletedChange(newCompleted: Boolean) {
+        _uiState.update {
+            it.copy(completed = newCompleted)
+        }
+    }
+
     fun loadTaskDetails(taskId: String) {
         val uid = getCurrentUserUseCase() ?: return
 
@@ -108,7 +114,7 @@ class TaskFormViewModel @Inject constructor(
                     title = currentTitle,
                     description = currentDescription,
                     ownerId = uid,
-                    completed = false,
+                    completed = _uiState.value.completed,
                     createdAt = System.currentTimeMillis(),
                     updatedAt = System.currentTimeMillis()
                 )

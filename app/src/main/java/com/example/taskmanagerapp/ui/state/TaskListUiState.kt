@@ -6,5 +6,6 @@ import java.util.ArrayList
 data class TaskListUiState(
     val isLoading: Boolean = false,
     val tasks: List<Task> = ArrayList<Task>(),
+    val searchQuery: String = "",
     val errorMessage: String? = null
 )
